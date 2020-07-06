@@ -3,7 +3,7 @@ library("dplyr")
 library("readxl")
 
 #get the data
-data <- read_excel("C:/Users/thilo/Documents/Mappe1.xlsx")
+data <- read_excel("C:/Users/thilo/Documents/data.xlsx")
 
 #check for douplicates
 data %>% group_by(Gene.names) %>% summarize(frequency = n()) %>% 
@@ -13,7 +13,7 @@ data_unique <- make_unique(data, "Gene.names", "Protein.IDs", delim = ";")
 
 #Get a SummarizedExperiment object
 LFQ_columns <- grep("LFQ.", colnames(data_unique)) # get LFQ column numbers
-experimental_design <- read_excel("C:/Users/thilo/Documents/Mappe2.xlsx")
+experimental_design <- read_excel("C:/Users/thilo/Documents/data_se.xlsx")
 data_se <- make_se(data_unique, LFQ_columns, experimental_design)
 
 #for plotting:
